@@ -22,6 +22,8 @@ public class Main {
         VideoStore.displayRegularAccount();
         Database.saveItemData();
         Database.saveAccountData();
-
+        GuestAccount guest = new GuestAccount("0", "quoc", "123 CMT8", "0123","quoc7603","quoc123");
+        guest.display();
+        guest.rentItem();
     }
 }

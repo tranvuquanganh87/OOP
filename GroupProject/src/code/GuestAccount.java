@@ -36,7 +36,7 @@ public class GuestAccount extends Account{
             return;
         }
         // Guest account can only rent 1-week loan item
-        if (Objects.equals(item.getLoanType(), "2-day loan")) {
+        if (Objects.equals(item.getLoanType().toLowerCase(), "2-day loan".toLowerCase())) {
             System.out.println("Guest cannot borrow a 2-day loan item!");
             return;
         }

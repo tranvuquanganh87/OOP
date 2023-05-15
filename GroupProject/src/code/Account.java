@@ -109,7 +109,7 @@ public abstract class Account {
         System.out.print("Enter id: ");
         Scanner input = new Scanner(System.in);
         String rentItemId = input.nextLine();
-        Item tmp = VideoStore.findItem(rentItemId);
+        Item tmp = VideoStore.findItem(rentItemId.toUpperCase());
 
         // Check if the item is in the list
         if (tmp == null) {
