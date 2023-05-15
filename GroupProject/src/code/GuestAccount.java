@@ -1,5 +1,7 @@
 package code;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class GuestAccount extends Account{
     public GuestAccount(String id, String name, String address, String phoneNumber, ArrayList<Item> rentalList, String username, String password) {
@@ -20,5 +22,24 @@ public class GuestAccount extends Account{
                 ", number of rentals =" + super.getRentalList().size() +
                 ", username ='" + super.getUsername() + '\'' +
                 '}');
+    }
+
+    public void rentItem () {
+        // If the current user want to borrow the third item.
+        if (this.getRentalList().size() > 2) {
+            System.out.println("Guest Account can only rent 2 items at a time!");
+            return;
+        }
+
+        Item item = Account.validateOrder();
+        if (item == null) {
+            return;
+        }
+        // Guest account can only rent 1-week loan item
+        if (Objects.equals(item.getLoanType(), "2-day loan")) {
+            System.out.println("Guest cannot borrow a 2-day loan item!");
+            return;
+        }
+        super.rentItem(item);
     }
 }

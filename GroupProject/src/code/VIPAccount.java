@@ -29,4 +29,11 @@ public class VIPAccount extends Account{
                 ", username ='" + super.getUsername() + '\'' +
                 '}');
     }
+
+    public void rentItem() {
+        Item item = validateOrder();
+        if (item != null) {
+            super.rentItem(item);
+        }
+    }
 }

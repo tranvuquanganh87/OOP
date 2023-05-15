@@ -1,5 +1,7 @@
 package code;
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class RegularAccount extends Account{
 
@@ -21,6 +23,13 @@ public class RegularAccount extends Account{
                 ", number of rentals =" + super.getRentalList().size() +
                 ", username ='" + super.getUsername() + '\'' +
                 '}');
+    }
+
+    public void rentItem() {
+        Item item = validateOrder();
+        if (item != null) {
+            super.rentItem(item);
+        }
     }
 }
 
