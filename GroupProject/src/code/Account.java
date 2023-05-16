@@ -1,5 +1,9 @@
 package code;
+
+import utilities.Database;
+
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class Account {
@@ -10,6 +14,10 @@ public abstract class Account {
     private ArrayList<Item> rentalList;
     private String username;
     private String password;
+    private static ArrayList<Item> itemList = Database.loadItemData();
+    private static ArrayList<Account> accountList = Database.loadAccountData();
+    private static Database database;
+    private VideoStore videoStore = new VideoStore(itemList, accountList, database);
 
     public Account(String id, String name, String address, String phoneNumber, ArrayList<Item> rentalList, String username, String password) {
         this.id = id;
@@ -98,5 +106,22 @@ public abstract class Account {
     }
 
     public abstract void display();
+
+    public void rentItem() {
+        // enter the info rental item
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the item's id: ");
+        String id = scan.next();
+
+        // rent item func
+        for (int i = 0; i < videoStore.getItemList().size(); i++) {
+            int quantity = videoStore.getItemList().get(i).getNumberOfCopies() - 1;
+            if (Objects.equals(videoStore.getItemList().get(i).getId(), id)) {
+                videoStore.getItemList().get(i).setNumberOfCopies(quantity);
+                if (videoStore.getItemList().get(i).getNumberOfCopies() == 0) videoStore.getItemList().get(i).setRentalStatus(false);
+                break;
+            }
+        }
+    }
 
 }
