@@ -14,10 +14,10 @@ public abstract class Account {
     private ArrayList<Item> rentalList;
     private String username;
     private String password;
-    private static ArrayList<Item> itemList = Database.loadItemData();
-    private static ArrayList<Account> accountList = Database.loadAccountData();
-    private static Database database;
-    private VideoStore videoStore = new VideoStore(itemList, accountList, database);
+//    private static ArrayList<Item> itemList = Database.loadItemData();
+//    private static ArrayList<Account> accountList = Database.loadAccountData();
+//    private static Database database;
+//    private VideoStore videoStore = new VideoStore(itemList, accountList, database);
     Scanner scan = new Scanner(System.in);
 
     public Account(String id, String name, String address, String phoneNumber, ArrayList<Item> rentalList, String username, String password) {
@@ -116,12 +116,12 @@ public abstract class Account {
 
 
         // rent item func
-        for (int i = 0; i < videoStore.getItemList().size(); i++) {
-            int quantity = videoStore.getItemList().get(i).getNumberOfCopies() - 1;
-            if (Objects.equals(videoStore.getItemList().get(i).getId(), id)) {
-                rentalList.add(videoStore.getItemList().get(i));
-                videoStore.getItemList().get(i).setNumberOfCopies(quantity);
-                if (videoStore.getItemList().get(i).getNumberOfCopies() == 0) videoStore.getItemList().get(i).setRentalStatus(false);
+        for (int i = 0; i < VideoStore.getItemList().size(); i++) {
+            int quantity = VideoStore.getItemList().get(i).getNumberOfCopies() - 1;
+            if (Objects.equals(VideoStore.getItemList().get(i).getId(), id)) {
+                rentalList.add(VideoStore.getItemList().get(i));
+                VideoStore.getItemList().get(i).setNumberOfCopies(quantity);
+                if (VideoStore.getItemList().get(i).getNumberOfCopies() == 0) VideoStore.getItemList().get(i).setRentalStatus(false);
                 break;
             }
         }
