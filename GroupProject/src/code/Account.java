@@ -18,6 +18,7 @@ public abstract class Account {
     private static ArrayList<Account> accountList = Database.loadAccountData();
     private static Database database;
     private VideoStore videoStore = new VideoStore(itemList, accountList, database);
+    Scanner scan = new Scanner(System.in);
 
     public Account(String id, String name, String address, String phoneNumber, ArrayList<Item> rentalList, String username, String password) {
         this.id = id;
@@ -126,7 +127,28 @@ public abstract class Account {
         }
     }
 
-//    public void returnItem(){
-//
-//    }
+    public void returnItem(){
+        System.out.println("Enter the item's id you want to return: ");
+        String id = scan.next();
+        System.out.println("Enter the number of item you want to return: ");
+        int returnQuantity = scan.nextInt();
+
+        // return item func
+        for (int i = 0; i < rentalList.size();i++){
+            int currQuantity = rentalList.get(i).getNumberOfCopies();
+            if (Objects.equals(rentalList.get(i).getId(),id)){
+                if (returnQuantity < currQuantity) {
+                    rentalList.get(i).setNumberOfCopies(currQuantity - returnQuantity);
+                    break;
+                }
+                else if (returnQuantity == currQuantity){
+                    rentalList.remove(rentalList.get(i));
+                    VideoStore.getItemList().get(i).setNumberOfCopies(returnQuantity);
+                    // after return item - check if the item rent status = false, set it to true
+                    if (!VideoStore.getItemList().get(i).isRentalStatus()) VideoStore.getItemList().get(i).setRentalStatus(true);
+                }
+            }
+
+        }
+    }
 }
