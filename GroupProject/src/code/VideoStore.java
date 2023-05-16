@@ -15,6 +15,7 @@ public class VideoStore {
         this.database = database;
     }
 
+
     public static ArrayList<Item> getItemList() {
         return itemList;
     }
