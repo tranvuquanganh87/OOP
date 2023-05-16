@@ -113,10 +113,12 @@ public abstract class Account {
         System.out.println("Enter the item's id: ");
         String id = scan.next();
 
+
         // rent item func
         for (int i = 0; i < videoStore.getItemList().size(); i++) {
             int quantity = videoStore.getItemList().get(i).getNumberOfCopies() - 1;
             if (Objects.equals(videoStore.getItemList().get(i).getId(), id)) {
+                rentalList.add(videoStore.getItemList().get(i));
                 videoStore.getItemList().get(i).setNumberOfCopies(quantity);
                 if (videoStore.getItemList().get(i).getNumberOfCopies() == 0) videoStore.getItemList().get(i).setRentalStatus(false);
                 break;
@@ -124,4 +126,7 @@ public abstract class Account {
         }
     }
 
+//    public void returnItem(){
+//
+//    }
 }
