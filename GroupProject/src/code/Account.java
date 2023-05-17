@@ -102,7 +102,7 @@ public abstract class Account {
     public abstract void display();
 
     public void rentItem(String itemId, String amount) {
-        Item item = ErrorHandle.itemValidate(itemId);
+        Item item = VideoStore.findItem(itemId);
 
         // No item found
         if (item == null) {

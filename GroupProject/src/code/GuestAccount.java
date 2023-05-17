@@ -33,7 +33,7 @@ public class GuestAccount extends Account{
             return;
         }
 
-        Item item = ErrorHandle.itemValidate(itemId);
+        Item item = VideoStore.findItem(itemId);
         if (item == null) {
             return;
         }

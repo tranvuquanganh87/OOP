@@ -85,15 +85,4 @@ public class ErrorHandle {
             return false;
         }
     }
-
-    public static Item itemValidate (String id) {
-        Item tmp = VideoStore.findItem(id.toUpperCase());
-
-        // Check if the item is in the list
-        if (tmp == null) {
-            System.out.println("The item you entered is not available!");
-            return null;
-        }
-        return tmp;
-    }
 }
