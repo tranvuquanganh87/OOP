@@ -1,4 +1,6 @@
 package code;
+import utilities.ErrorHandle;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -98,48 +100,24 @@ public abstract class Account {
     }
 
     public abstract void display();
-    public static Item validateOrder () {
 
-        // Only show items that is available for rent
-        for (Item i : VideoStore.getItemList()) {
-            if (i.isRentalStatus()) {
-                i.display();
-            }
-        }
-        System.out.print("Enter id: ");
-        Scanner input = new Scanner(System.in);
-        String rentItemId = input.nextLine();
-        Item tmp = VideoStore.findItem(rentItemId.toUpperCase());
+    public void rentItem(String itemId, String amount) {
+        Item item = ErrorHandle.itemValidate(itemId);
 
-        // Check if the item is in the list
-        if (tmp == null) {
-            System.out.println("The item you entered is not available!");
-            return null;
+        // No item found
+        if (item == null) {
+            return;
         }
-        return tmp;
-    }
-    public void rentItem(Item item) {
-        Scanner input = new Scanner(System.in);
-        // Validate the number of copies taken from the customer
-        String rentNumber;
-        while (true) {
-            System.out.print("Enter number of copies: ");
-            rentNumber = input.nextLine();
-            // Try catch for parseInt (if the input contains alphabetical letter)
-            try {
-                int num = Integer.parseInt(rentNumber);
-                if (num < 0 || num > item.getNumberOfCopies()) {
-                    System.out.println("Number of copies entered is invalid!");
-                } else {
-                    break;
-                }
-            }catch (NumberFormatException e) {
-                System.out.println("Please enter a numeric value!");
-            }
+        // Validate the number of copies
+        if (!ErrorHandle.rentAmountValidate(item, amount)) {
+            return;
         }
-        item.setNumberOfCopies(item.getNumberOfCopies() - Integer.parseInt(rentNumber));
+
+        // update
+        item.setNumberOfCopies(item.getNumberOfCopies() - Integer.parseInt(amount));
+
         // Add the current rental with its number of copies
-        for (int i = 0; i < Integer.parseInt(rentNumber); i++) {
+        for (int i = 0; i < Integer.parseInt(amount); i++) {
             this.getRentalList().add(item);
         }
 

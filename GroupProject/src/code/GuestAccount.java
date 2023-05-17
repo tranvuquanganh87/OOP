@@ -1,4 +1,6 @@
 package code;
+import utilities.ErrorHandle;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -24,14 +26,14 @@ public class GuestAccount extends Account{
                 '}');
     }
 
-    public void rentItem () {
+    public void rentItem (String itemId, String amount) {
         // If the current user want to borrow the third item.
         if (this.getRentalList().size() > 2) {
             System.out.println("Guest Account can only rent 2 items at a time!");
             return;
         }
 
-        Item item = Account.validateOrder();
+        Item item = ErrorHandle.itemValidate(itemId);
         if (item == null) {
             return;
         }
@@ -40,6 +42,6 @@ public class GuestAccount extends Account{
             System.out.println("Guest cannot borrow a 2-day loan item!");
             return;
         }
-        super.rentItem(item);
+        super.rentItem(itemId, amount);
     }
 }

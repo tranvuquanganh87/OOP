@@ -1,4 +1,8 @@
 package utilities;
+
+import code.Item;
+import code.VideoStore;
+
 public class ErrorHandle {
     public static int MIN_CHAR = 1;
     public static int MAX_CHAR = 201;
@@ -66,5 +70,30 @@ public class ErrorHandle {
         }
         return true;
     }
+    public static boolean rentAmountValidate(Item item, String amount) {
+        // Try catch for parseInt (if the input contains alphabetical letter)
+        try {
+            int num = Integer.parseInt(amount);
+            if (num < 0 || num > item.getNumberOfCopies()) {
+                System.out.println("Number of copies entered is invalid!");
+                return false;
+            } else {
+                return true;
+            }
+        }catch (NumberFormatException e) {
+            System.out.println("Please enter a numeric value!");
+            return false;
+        }
+    }
 
+    public static Item itemValidate (String id) {
+        Item tmp = VideoStore.findItem(id.toUpperCase());
+
+        // Check if the item is in the list
+        if (tmp == null) {
+            System.out.println("The item you entered is not available!");
+            return null;
+        }
+        return tmp;
+    }
 }

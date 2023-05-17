@@ -25,11 +25,8 @@ public class RegularAccount extends Account{
                 '}');
     }
 
-    public void rentItem() {
-        Item item = validateOrder();
-        if (item != null) {
-            super.rentItem(item);
-        }
+    public void rentItem(String itemId, String amount) {
+        super.rentItem(itemId, amount);
     }
 }
 
