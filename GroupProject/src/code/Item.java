@@ -1,5 +1,5 @@
 package code;
-import java.util.Scanner;
+
 public abstract class Item {
     private String id;
     private String title;
@@ -9,6 +9,8 @@ public abstract class Item {
     private double rentalFee;
     private boolean rentalStatus;
 
+    private String itemID;
+
     public Item(String id, String title, String rentalType, String loanType,int stock, double rentalFee) {
         this.id = id;
         this.title = title;
@@ -17,6 +19,10 @@ public abstract class Item {
         this.rentalFee = rentalFee;;
         this.numberOfCopies = stock;
         this.rentalStatus = (numberOfCopies > 0) ? true : false;
+
+
+        IDGenerator idGenerator = new IDGenerator();
+        this.itemID = idGenerator.getItemID();
     }
 
     public Item() {
@@ -27,6 +33,9 @@ public abstract class Item {
         this.numberOfCopies = 0;
         this.rentalFee = 0.0;
         this.rentalStatus = false;
+
+        IDGenerator idGenerator = new IDGenerator();
+        this.itemID = idGenerator.getItemID();
     }
 
     public String getId() {

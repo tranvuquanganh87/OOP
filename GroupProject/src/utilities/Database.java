@@ -1,6 +1,8 @@
 package utilities;
-import java.io.*;
+
 import code.*;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,7 +10,7 @@ public class Database {
     // Load Account Database (Complete)
     public static ArrayList<Account> loadAccountData() {
         ArrayList<Account> accountList = new ArrayList<Account>();
-        File dir = new File(".\\database\\customer.txt");
+        File dir = new File("database/customer.txt");
         BufferedReader inputStream = null;
         String line;
 
@@ -32,9 +34,9 @@ public class Database {
                 if (rentalQuantity > 0) {
                     for (int i = 0; i < rentalQuantity; i++) {
                         String itemID = inputStream.readLine();
-                        Item itemFind = VideoStore.findItem(itemID);
+                        Item itemFind = SearchEngine.searchItem(itemID);
                         if (itemFind != null) {
-                            rentalList.add(VideoStore.findItem(itemID));
+                            rentalList.add(SearchEngine.searchItem(itemID));
                         }
                     }
                 }
@@ -63,7 +65,7 @@ public class Database {
     // Load Item Database (Complete)
     public static ArrayList<Item> loadItemData(){
         ArrayList<Item> itemList = new ArrayList<Item>();
-        File dir = new File(".\\database\\item.txt");
+        File dir = new File("database/item.txt");
         BufferedReader inputStream = null;
         String line;
 
@@ -104,11 +106,11 @@ public class Database {
 
         // Load Item data
         return itemList;
-}
+    }
 
     // Save Account to database (Complete)
     public static void saveAccountData() {
-        File dir = new File(".\\database\\customer.txt");
+        File dir = new File("database/customer.txt");
         BufferedWriter outputStream = null;
         try {
             outputStream = new BufferedWriter(new FileWriter(dir));
@@ -136,7 +138,7 @@ public class Database {
 
     // Save Item to database (Complete)
     public static void saveItemData(){
-        File dir = new File(".\\database\\item.txt");
+        File dir = new File("database/item.txt");
         BufferedWriter outputStream = null;
         try {
             outputStream = new BufferedWriter(new FileWriter(dir));
@@ -163,4 +165,6 @@ public class Database {
             System.out.println("Fail to create file!");
         }
     }
+
+
 }

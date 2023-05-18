@@ -1,6 +1,7 @@
+import code.VideoStore;
+import utilities.Database;
+
 import java.io.IOException;
-import utilities.*;
-import code.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,7 +20,15 @@ public class Main {
 //        VideoStore.displayAccountSortByName();
 //        VideoStore.displayGuestAccount();
 //        VideoStore.displayVIPAccount();
-        VideoStore.displayRegularAccount();
+//        VideoStore.displayRegularAccount();
+//        System.out.println(VideoStore.getItemList().size());
+
+
+
+//        VideoStore.addCustomer();
+//        VideoStore.addCustomer();
+
+        VideoStore.findCustomer();
         Database.saveItemData();
         Database.saveAccountData();
 

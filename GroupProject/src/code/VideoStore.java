@@ -1,8 +1,10 @@
 package code;
+
+import utilities.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import utilities.*;
 
 public class VideoStore {
     private static ArrayList<Item> itemList = Database.loadItemData();
@@ -49,7 +51,7 @@ public class VideoStore {
         if (!ErrorHandle.customerNameValidate(name)) {
             System.out.println("Error 1");
             return false;
-        };
+        }
 
         // Register phase: Address
         System.out.print("PLEASE ENTER YOUR ADDRESS: ");
@@ -57,7 +59,7 @@ public class VideoStore {
         if (!ErrorHandle.customerAddressValidate(address)) {
             System.out.println("Error 2");
             return false;
-        };
+        }
 
         // Register phase: Phone Number
         System.out.print("PLEASE ENTER YOUR PHONE NUMBER: ");
@@ -65,7 +67,7 @@ public class VideoStore {
         if (!ErrorHandle.customerPhoneNumberValidate(phoneNum)) {
             System.out.println("Error 3");
             return false;
-        };
+        }
 
         // Register phase: Username
         System.out.print("PLEASE ENTER YOUR USERNAME: ");
@@ -73,7 +75,7 @@ public class VideoStore {
         if (!ErrorHandle.customerUsernameValidate(username)) {
             System.out.println("Error 4");
             return false;
-        };
+        }
 
 
         // Register phase: Password
@@ -82,13 +84,13 @@ public class VideoStore {
         if (!ErrorHandle.customerPasswordValidate(password)) {
             System.out.println("Error 5");
             return false;
-        };
+        }
 
-        Account newAcc = new GuestAccount("1234",name,address,phoneNum,username,password);
+        Account newAcc = new GuestAccount(IDGenerator.getCustomerID(),name,address,phoneNum,username,password);
         accountList.add(newAcc);
         return true;
 
-    };
+    }
 
     public static void displayAllAccount() {
         for (Account account:accountList) {
@@ -148,15 +150,30 @@ public class VideoStore {
         Collections.sort(accountList, new SortAccountByName());
         displayAllAccount();
     }
-    public static Item findItem(String keyword) {
-        for (Item item: itemList) {
-            if ((item.getTitle().equals(keyword)) || (item.getId().equals(keyword))) {
-                return item;
-            }
-        }
+    public static void findItem() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Search with ID or title:");
+        String searchBar = sc.nextLine();
+        Item tempItem = SearchEngine.searchItem(searchBar);
 
-        System.out.println("Item not found!");
-        return null;
+        if (tempItem == null){
+            System.out.println("Error 6");
+        }
+        else
+            tempItem.display();
+    }
+
+    public static void findCustomer() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Search with ID or title:");
+        String searchBar = sc.nextLine();
+        Account tempAccount = SearchEngine.searchCustomer(searchBar);
+
+        if (tempAccount == null){
+            System.out.println("Error 6");
+        }
+        else
+            tempAccount.display();
     }
 
 

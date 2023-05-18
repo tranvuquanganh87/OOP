@@ -1,6 +1,5 @@
 package code;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class Account {
     private String id;
@@ -10,6 +9,7 @@ public abstract class Account {
     private ArrayList<Item> rentalList;
     private String username;
     private String password;
+    private String customerID;
 
     public Account(String id, String name, String address, String phoneNumber, ArrayList<Item> rentalList, String username, String password) {
         this.id = id;
@@ -19,6 +19,9 @@ public abstract class Account {
         this.rentalList = rentalList;
         this.username = username;
         this.password = password;
+
+        IDGenerator idGenerator = new IDGenerator();
+        this.customerID = idGenerator.getCustomerID();
     }
 
     public Account() {
@@ -29,6 +32,9 @@ public abstract class Account {
         this.rentalList = new ArrayList<Item>();
         this.username = "";
         this.password = "";
+
+        IDGenerator idGenerator = new IDGenerator();
+        this.customerID = idGenerator.getCustomerID();
     }
 
     public Account(String id, String name, String address, String phoneNumber, String username, String password) {
@@ -99,4 +105,7 @@ public abstract class Account {
 
     public abstract void display();
 
+    public String getCustomerID() {
+        return customerID;
+    }
 }
