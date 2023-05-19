@@ -1,7 +1,0 @@
-Account:
-	+ Add validateOrder class: check by id
-	+ renting method
-Guest:
-	+ Overridden renting method (add contraints for guest account)
-Re/Vip:
-	+ call super method
